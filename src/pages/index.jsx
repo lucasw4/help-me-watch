@@ -4,7 +4,7 @@ import SearchBar from '@/components/SearchBar'
 
 const index = () => {
   return (
-    <div className='h-screen bg-gray-100'>
+    <div className='h-screen bg-zinc-700'>
         <NavBar />
         <SearchBar />
     </div>

@@ -48,10 +48,10 @@ const SearchBar = () => {
       }, [searchInput]);
 
   return (
-    <div className='flex w-screen justify-center items-center bg-gray-100 pb-5'>
+    <div className='flex w-screen justify-center items-center bg-zinc-700 pb-5'>
       <form id="search" className='flex flex-col justify-center items-center' onSubmit={handleMovieSearchSubmit}>
-        <label htmlFor="search-input" className='text-purple-800'>Search</label>
-        <input type='text' id="search-input" placeholder='search for a movie...' className='w-96 h-24 rounded-2xl text-black mb-6' value={searchInput} onChange={handleMovieSearchChange} />
+        <label htmlFor="search-input" className='text-zinc-200 my-4 text-xl'>Search Movies</label>
+        <input type='text' id="search-input" placeholder='search for a movie...' className='w-96 h-24 rounded-2xl text-black mb-6 p-4' value={searchInput} onChange={handleMovieSearchChange} />
         {!hide && searchResults && searchResults.length > 1 && (
             <div className='text-black w-72 h-36 bg-zinc-400 rounded-lg border-zinc-900 border-solid border p-1 flex'>
                 {searchResults["Poster"] !== "N/A" && (

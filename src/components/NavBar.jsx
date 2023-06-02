@@ -3,11 +3,11 @@ import React from 'react'
 
 const NavBar = () => {
   return (
-    <div className='w-screen bg-gray-200 h-10 flex items-center justify-between px-10'>
-        <span className='text-orange-400'>
+    <div className='w-screen bg-zinc-700 h-10 flex items-center justify-between px-10'>
+        <span className='text-purple-600 font-bold text-xl'>
             HelpMeWatch
         </span>
-        <div className='text-red-700 w-32 flex justify-between'>
+        <div className='text-orange-400 w-32 flex justify-between'>
             <Link href={'/login'}>
                 Login
             </Link>
