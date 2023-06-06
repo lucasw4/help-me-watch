@@ -1,9 +1,11 @@
-import React from 'react'
+import React, {useState} from 'react'
 import NavBar from '@/components/NavBar'
 import Button from '@mui/material/Button';
-import { TextField } from '@mui/material';
+import { Menu, TextField, } from '@mui/material';
+import FilterState from '@/components/FilterState';
 
-const index = () => {
+const index = ({filter, setFilter}) => {
+  
   return (
     <div className='h-screen bg-zinc-700'>
         <NavBar />
@@ -11,8 +13,10 @@ const index = () => {
           <h1 className='text-2xl text-center'>Get AI generated movie recommendations!</h1>
         </div>
         <div className='m-4 flex justify-center'>
+          <p>Get movie recommendations by:</p>
+          <FilterState setFilter={setFilter} filter={filter}/>
           <form className=' w-2/3'>
-            <TextField id="vibe-input" sx={{ input: { color: 'white' } }} fullWidth InputLabelProps={{className: "text-white"}} FormHelperTextProps={{className: "text-white"}} label="Vibe" variant='filled' color="secondary" helperText="Enter the vibe of the movie you want" className='text-white'/>
+            {filter === "Vibe" && (<TextField id="vibe-input" sx={{ input: { color: 'white' } }} fullWidth InputLabelProps={{className: "text-white"}} FormHelperTextProps={{className: "text-white"}} label="Vibe" variant='filled' color="secondary" helperText="Enter the vibe of the movie you want" className='text-white'/>)}
             <Button variant="contained" color='secondary' size='small' className='w-[50px] h-[50px]'>Test</Button>
           </form>
         </div>
