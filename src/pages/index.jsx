@@ -4,6 +4,7 @@ import Button from '@mui/material/Button';
 import { Menu, TextField, } from '@mui/material';
 import FilterState from '@/components/FilterState';
 import OtherMovieInput from '@/components/OtherMovieInput';
+import TransitionStateTesting from '@/components/TransitionStateTesting';
 
 const index = ({filter, setFilter}) => {
   
@@ -14,7 +15,7 @@ const index = ({filter, setFilter}) => {
           <h1 className='text-2xl text-center'>Get AI generated movie recommendations!</h1>
         </div>
         <div className='m-4 flex justify-center flex-col'>
-          <div className='flex justify-between items-center mb-6'>
+          {/* <div className='flex justify-between items-center mb-6'>
             <p>Get movie recommendations by:</p>
             <FilterState setFilter={setFilter} filter={filter}/>
           </div>
@@ -23,7 +24,8 @@ const index = ({filter, setFilter}) => {
               {filter === "Vibe" ? (<TextField id="vibe-input" sx={{ input: { color: 'white' } }} fullWidth InputLabelProps={{className: "text-white"}} FormHelperTextProps={{className: "text-white"}} label="Vibe" variant='filled' color="secondary" helperText="Enter the vibe of the movie you want" className='text-white'/>) : (<OtherMovieInput />)}
               <Button variant="contained" color='secondary' size='small' className='w-[50px] h-[50px]'>Test</Button>
             </div>
-          </form>
+          </form> */}
+          <TransitionStateTesting filter={filter} setFilter={setFilter} />
         </div>
     </div>
   )
