@@ -110,6 +110,18 @@ const TransitionStateTesting = ({ filter, setFilter }) => {
               helperText="Enter a name of another movie you like"
               className="text-white"
             />
+            <div className="group">
+              <label
+                for="movie-input"
+                className="ml-4 group-focus-within:text-purple-500 transition-all group-focus-within:text-xs"
+              >
+                Movie 1
+              </label>
+              <input
+                className="w-full bg-transparent border-b-2 border-zinc-700 px-2 focus:outline-none focus:border-purple-500 transition-colors"
+                id="movie-input"
+              ></input>
+            </div>
             <Button
               variant="contained"
               color="secondary"
