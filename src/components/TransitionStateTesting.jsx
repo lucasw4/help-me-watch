@@ -38,9 +38,18 @@ const TransitionStateTesting = ({ filter, setFilter }) => {
   return (
     <div className="bg-zinc-600">
       {step === 0 && (
-        <div className="flex justify-between items-center mb-6">
-          <p>Get movie recommendations by:</p>
-          <FilterState setFilter={setFilter} filter={filter} />
+        <div className="flex flex-col items-center mb-6 h-56 justify-between pt-10">
+          <h3 className="text-lg text-zinc-200">
+            Get movie recommendations by:
+          </h3>
+          <select
+            value={filter}
+            onChange={(event) => setFilter(event.target.value)}
+            className="bg-zinc-500 bg-opacity-20 rounded-sm p-2 h-14 border-b-2 border-zinc-700 text-zinc-200"
+          >
+            <option value="Other Movies">Other Movies</option>
+            <option value="Vibe">Vibe</option>
+          </select>
           <Button
             variant="contained"
             color="secondary"
