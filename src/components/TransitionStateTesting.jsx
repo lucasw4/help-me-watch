@@ -9,7 +9,8 @@ const TransitionStateTesting = ({ filter, setFilter }) => {
   const [filterText, setFilterText] = useState("");
 
   const [history, setHistory] = useState([]);
-  const [response, setResponse] = useState("");
+  const [response, setResponse] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const handleNext = () => {
     if (step <= 3) {
@@ -37,27 +38,40 @@ const TransitionStateTesting = ({ filter, setFilter }) => {
   };
 
   const fetchMovies = async () => {
-    setResponse("");
+    setResponse([]);
     console.log("Getting response from OpenAI");
+    setLoading(true);
     const aiData = await fetch("/api/completion", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        prompt: `Recommend me 3 movies, in the format of a javascript array of objects like: [{title: movie title, summary: movie summary (short, 20 word summary of the movie)}], that are similar to these 3 movies: ${inputs[0]}, ${inputs[1]}, ${inputs[2]}`,
+        prompt: `Create a valid JSON array and recommend me just the title of 3 movies that are similar to these 3 movies: ${inputs[0]}, ${inputs[1]}, ${inputs[2]} following this format:
+        [movie title, movie title, movie title]
+        The array should be trimmed of all white space
+        `,
       }),
     }).then((aiData) => aiData.json());
-
-    console.log(aiData.data.text);
+    setLoading(false);
+    const arrayData = JSON.parse(aiData.data.text);
+    setResponse(arrayData);
+    console.log(typeof arrayData);
+    console.log(response);
   };
 
   const promptSubmit = () => {
+    setStep(5);
     fetchMovies();
   };
 
   return (
     <div className="bg-zinc-600">
+      {loading && (
+        <div className="flex justify-center items-center text-3xl font-bold">
+          loading...
+        </div>
+      )}
       {step === 0 && (
         <div className="flex flex-col items-center mb-6 h-56 justify-between pt-10">
           <h3 className="text-lg text-zinc-200">
@@ -90,7 +104,7 @@ const TransitionStateTesting = ({ filter, setFilter }) => {
           >
             <div className="group p-4">
               <label
-                for="movie-input"
+                htmlFor="movie-input"
                 className="ml-4 group-focus-within:text-purple-500 transition-all group-focus-within:text-xs group-focus-within:ml-0 "
               >
                 Vibe
@@ -123,7 +137,7 @@ const TransitionStateTesting = ({ filter, setFilter }) => {
           >
             <div className="group p-4">
               <label
-                for="movie-input"
+                htmlFor="movie-input"
                 className="ml-4 group-focus-within:text-purple-500 transition-all group-focus-within:text-xs"
               >
                 Movie 1
@@ -156,7 +170,7 @@ const TransitionStateTesting = ({ filter, setFilter }) => {
           >
             <div className="group p-4">
               <label
-                for="movie-input"
+                htmlFor="movie-input"
                 className="ml-4 group-focus-within:text-purple-500 transition-all group-focus-within:text-xs"
               >
                 Movie 2
@@ -189,7 +203,7 @@ const TransitionStateTesting = ({ filter, setFilter }) => {
           >
             <div className="group p-4">
               <label
-                for="movie-input"
+                htmlFor="movie-input"
                 className="ml-4 group-focus-within:text-purple-500 transition-all group-focus-within:text-xs group-focus-within:ml-0 "
               >
                 Setting
@@ -222,7 +236,7 @@ const TransitionStateTesting = ({ filter, setFilter }) => {
           >
             <div className="group p-4">
               <label
-                for="movie-input"
+                htmlFor="movie-input"
                 className="ml-4 group-focus-within:text-purple-500 transition-all group-focus-within:text-xs"
               >
                 Movie 3
@@ -255,7 +269,7 @@ const TransitionStateTesting = ({ filter, setFilter }) => {
           >
             <div className="group p-4">
               <label
-                for="movie-input"
+                htmlFor="movie-input"
                 className="ml-4 group-focus-within:text-purple-500 transition-all group-focus-within:text-xs group-focus-within:ml-0 "
               >
                 Setting
@@ -330,6 +344,16 @@ const TransitionStateTesting = ({ filter, setFilter }) => {
               Submit
             </Button>
           </div>
+        </div>
+      )}
+      {step === 5 && response.length > 0 && (
+        <div className="flex flex-col justify-center items-center text-xl font-semibold mb-5">
+          <h3 className="text-2xl font-bold text-purple-500 mb-5">
+            Your Recommendations:
+          </h3>
+          {response.map((ele, i) => {
+            return <div key={i}>{ele}</div>;
+          })}
         </div>
       )}
     </div>
