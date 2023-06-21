@@ -45,7 +45,7 @@ const TransitionStateTesting = ({ filter, setFilter }) => {
           <select
             value={filter}
             onChange={(event) => setFilter(event.target.value)}
-            className="bg-zinc-500 bg-opacity-20 rounded-sm p-2 h-14 border-b-2 border-zinc-700 text-zinc-200"
+            className="bg-zinc-500 bg-opacity-20 rounded-sm p-2 h-14 border-b-2 border-zinc-700 text-zinc-200 focus:border-purple-500 transition-colors"
           >
             <option value="Other Movies">Other Movies</option>
             <option value="Vibe">Vibe</option>
@@ -54,7 +54,7 @@ const TransitionStateTesting = ({ filter, setFilter }) => {
             variant="contained"
             color="secondary"
             size="small"
-            className="w-[50px] h-[50px]"
+            className="w-[50px] h-[50px] bg-purple-700"
             onClick={handleNext}
           >
             Next
@@ -67,27 +67,30 @@ const TransitionStateTesting = ({ filter, setFilter }) => {
             onSubmit={(e) => transitionFormSubmit(e)}
             onChange={(e) => setFilterText(e.target.value)}
           >
-            <TextField
-              id="vibe-input"
-              sx={{ input: { color: "white" } }}
-              fullWidth
-              InputLabelProps={{ className: "text-white" }}
-              FormHelperTextProps={{ className: "text-white" }}
-              label="Vibe"
-              variant="filled"
-              color="secondary"
-              helperText="Enter the vibe of the movie you want"
-              className="text-white"
-            />
-            <Button
-              variant="contained"
-              color="secondary"
-              size="small"
-              className="w-[50px] h-[50px]"
-              onClick={handleNext}
-            >
-              Next
-            </Button>
+            <div className="group p-4">
+              <label
+                for="movie-input"
+                className="ml-4 group-focus-within:text-purple-500 transition-all group-focus-within:text-xs group-focus-within:ml-0 "
+              >
+                Vibe
+              </label>
+              <input
+                className="w-full focus:placeholder-opacity-0 placeholder-zinc-300 bg-transparent border-b-2 border-zinc-700 px-2 focus:outline-none focus:border-purple-500 transition-colors"
+                id="movie-input"
+                placeholder="Enter the vibe you'd like the movie to have"
+              ></input>
+            </div>
+            <div className="flex justify-center items-center my-6">
+              <Button
+                variant="contained"
+                color="secondary"
+                size="small"
+                className="w-[50px] h-[50px] bg-purple-700"
+                onClick={handleNext}
+              >
+                Next
+              </Button>
+            </div>
           </form>
         </div>
       )}{" "}
@@ -97,20 +100,7 @@ const TransitionStateTesting = ({ filter, setFilter }) => {
             onSubmit={(e) => transitionFormSubmit(e)}
             onChange={(e) => setFilterText(e.target.value)}
           >
-            <TextField
-              id="other-movie-input"
-              sx={{ input: { color: "white" } }}
-              fullWidth
-              InputLabelProps={{ className: "text-white" }}
-              inputProps={{ className: "bg-zinc-600 rounded-sm" }}
-              FormHelperTextProps={{ className: "text-white" }}
-              label="Movie 1"
-              variant="filled"
-              color="secondary"
-              helperText="Enter a name of another movie you like"
-              className="text-white"
-            />
-            <div className="group">
+            <div className="group p-4">
               <label
                 for="movie-input"
                 className="ml-4 group-focus-within:text-purple-500 transition-all group-focus-within:text-xs"
@@ -118,19 +108,22 @@ const TransitionStateTesting = ({ filter, setFilter }) => {
                 Movie 1
               </label>
               <input
-                className="w-full bg-transparent border-b-2 border-zinc-700 px-2 focus:outline-none focus:border-purple-500 transition-colors"
+                className="w-full placeholder-zinc-300 bg-transparent border-b-2 border-zinc-700 px-2 focus:outline-none focus:border-purple-500 transition-colors"
                 id="movie-input"
+                placeholder="Enter the name of a movie you like"
               ></input>
             </div>
-            <Button
-              variant="contained"
-              color="secondary"
-              size="small"
-              className="w-[50px] h-[50px]"
-              onClick={handleNext}
-            >
-              Next
-            </Button>
+            <div className="flex justify-center items-center my-4 mb-6">
+              <Button
+                variant="contained"
+                color="secondary"
+                size="small"
+                className="w-[50px] h-[50px] bg-purple-700"
+                onClick={handleNext}
+              >
+                Next
+              </Button>
+            </div>
           </form>
         </div>
       )}
@@ -140,28 +133,30 @@ const TransitionStateTesting = ({ filter, setFilter }) => {
             onSubmit={(e) => transitionFormSubmit(e)}
             onChange={(e) => setFilterText(e.target.value)}
           >
-            <TextField
-              id="other-movie-input"
-              sx={{ input: { color: "white" } }}
-              fullWidth
-              InputLabelProps={{ className: "text-white" }}
-              inputProps={{ className: "bg-zinc-600 rounded-sm" }}
-              FormHelperTextProps={{ className: "text-white" }}
-              label="Movie 2"
-              variant="filled"
-              color="secondary"
-              helperText="Enter a name of another movie you like"
-              className="text-white"
-            />
-            <Button
-              variant="contained"
-              color="secondary"
-              size="small"
-              className="w-[50px] h-[50px]"
-              onClick={handleNext}
-            >
-              Next
-            </Button>
+            <div className="group p-4">
+              <label
+                for="movie-input"
+                className="ml-4 group-focus-within:text-purple-500 transition-all group-focus-within:text-xs"
+              >
+                Movie 2
+              </label>
+              <input
+                className="w-full placeholder-zinc-300 bg-transparent border-b-2 border-zinc-700 px-2 focus:outline-none focus:border-purple-500 transition-colors"
+                id="movie-input"
+                placeholder="Enter the name of a movie you like"
+              ></input>
+            </div>
+            <div className="flex justify-center items-center my-4 mb-6">
+              <Button
+                variant="contained"
+                color="secondary"
+                size="small"
+                className="w-[50px] h-[50px] bg-purple-700"
+                onClick={handleNext}
+              >
+                Next
+              </Button>
+            </div>
           </form>
         </div>
       )}{" "}
@@ -171,61 +166,65 @@ const TransitionStateTesting = ({ filter, setFilter }) => {
             onSubmit={(e) => transitionFormSubmit(e)}
             onChange={(e) => setFilterText(e.target.value)}
           >
-            <TextField
-              id="other-movie-input"
-              sx={{ input: { color: "white" } }}
-              fullWidth
-              InputLabelProps={{ className: "text-white" }}
-              inputProps={{ className: "bg-zinc-600 rounded-sm" }}
-              FormHelperTextProps={{ className: "text-white" }}
-              label="Setting"
-              variant="filled"
-              color="secondary"
-              helperText="Enter WHERE you'd like the movie to take place in"
-              className="text-white"
-            />
-            <Button
-              variant="contained"
-              color="secondary"
-              size="small"
-              className="w-[50px] h-[50px]"
-              onClick={handleNext}
-            >
-              Next
-            </Button>
+            <div className="group p-4">
+              <label
+                for="movie-input"
+                className="ml-4 group-focus-within:text-purple-500 transition-all group-focus-within:text-xs group-focus-within:ml-0 "
+              >
+                Setting
+              </label>
+              <input
+                className="w-full focus:placeholder-opacity-0 placeholder-zinc-300 bg-transparent border-b-2 border-zinc-700 px-2 focus:outline-none focus:border-purple-500 transition-colors"
+                id="movie-input"
+                placeholder="Enter where you'd like the movie to take place"
+              ></input>
+            </div>
+            <div className="flex justify-center items-center my-6">
+              <Button
+                variant="contained"
+                color="secondary"
+                size="small"
+                className="w-[50px] h-[50px] bg-purple-700"
+                onClick={handleNext}
+              >
+                Next
+              </Button>
+            </div>
           </form>
         </div>
       )}
       {step === 3 && filter === "Other Movies" && (
-        <form
-          onSubmit={(e) => transitionFormSubmit(e)}
-          onChange={(e) => setFilterText(e.target.value)}
-        >
-          <div>
-            <TextField
-              id="other-movie-input"
-              sx={{ input: { color: "white" } }}
-              fullWidth
-              InputLabelProps={{ className: "text-white" }}
-              inputProps={{ className: "bg-zinc-600 rounded-sm" }}
-              FormHelperTextProps={{ className: "text-white" }}
-              label="Movie 3"
-              variant="filled"
-              color="secondary"
-              helperText="Enter a name of another movie you like"
-              className="text-white"
-            />
-            <Button
-              variant="contained"
-              color="secondary"
-              size="small"
-              className="w-[50px] h-[50px]"
-              onClick={handleNext}
-            >
-              Next
-            </Button>
-          </div>
-        </form>
+        <div>
+          <form
+            onSubmit={(e) => transitionFormSubmit(e)}
+            onChange={(e) => setFilterText(e.target.value)}
+          >
+            <div className="group p-4">
+              <label
+                for="movie-input"
+                className="ml-4 group-focus-within:text-purple-500 transition-all group-focus-within:text-xs"
+              >
+                Movie 3
+              </label>
+              <input
+                className="w-full placeholder-zinc-300 bg-transparent border-b-2 border-zinc-700 px-2 focus:outline-none focus:border-purple-500 transition-colors"
+                id="movie-input"
+                placeholder="Enter the name of a movie you like"
+              ></input>
+            </div>
+            <div className="flex justify-center items-center my-4 mb-6">
+              <Button
+                variant="contained"
+                color="secondary"
+                size="small"
+                className="w-[50px] h-[50px] bg-purple-700"
+                onClick={handleNext}
+              >
+                Next
+              </Button>
+            </div>
+          </form>
+        </div>
       )}
       {step === 3 && filter === "Vibe" && (
         <div>
@@ -233,28 +232,30 @@ const TransitionStateTesting = ({ filter, setFilter }) => {
             onSubmit={(e) => transitionFormSubmit(e)}
             onChange={(e) => setFilterText(e.target.value)}
           >
-            <TextField
-              id="other-movie-input"
-              sx={{ input: { color: "white" } }}
-              fullWidth
-              InputLabelProps={{ className: "text-white" }}
-              inputProps={{ className: "bg-zinc-600 rounded-sm" }}
-              FormHelperTextProps={{ className: "text-white" }}
-              label="Setting"
-              variant="filled"
-              color="secondary"
-              helperText="Enter ANY other key features you'd like your movie to have (e.g features a black main character)"
-              className="text-white"
-            />
-            <Button
-              variant="contained"
-              color="secondary"
-              size="small"
-              className="w-[50px] h-[50px]"
-              onClick={handleNext}
-            >
-              Next
-            </Button>
+            <div className="group p-4">
+              <label
+                for="movie-input"
+                className="ml-4 group-focus-within:text-purple-500 transition-all group-focus-within:text-xs group-focus-within:ml-0 "
+              >
+                Setting
+              </label>
+              <input
+                className="w-full placeholder:text-xs focus:placeholder-opacity-0 placeholder-zinc-300 bg-transparent border-b-2 border-zinc-700 px-2 focus:outline-none focus:border-purple-500 transition-colors"
+                id="movie-input"
+                placeholder="Enter any other key features you want your movie to have "
+              ></input>
+            </div>
+            <div className="flex justify-center items-center my-6">
+              <Button
+                variant="contained"
+                color="secondary"
+                size="small"
+                className="w-[50px] h-[50px] bg-purple-700"
+                onClick={handleNext}
+              >
+                Next
+              </Button>
+            </div>
           </form>
         </div>
       )}
