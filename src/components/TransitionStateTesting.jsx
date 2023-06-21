@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import { TextField } from "@mui/material";
 import FilterState from "@/components/FilterState";
-import openaiInstance from "../../utils/openai";
 
 const TransitionStateTesting = ({ filter, setFilter }) => {
   const [step, setStep] = useState(0);
@@ -10,6 +9,7 @@ const TransitionStateTesting = ({ filter, setFilter }) => {
   const [filterText, setFilterText] = useState("");
 
   const [history, setHistory] = useState([]);
+  const [response, setResponse] = useState("");
 
   const handleNext = () => {
     if (step <= 3) {
@@ -36,7 +36,25 @@ const TransitionStateTesting = ({ filter, setFilter }) => {
     console.log(inputs);
   };
 
-  const promptSubmit = () => {};
+  const fetchMovies = async () => {
+    setResponse("");
+    console.log("Getting response from OpenAI");
+    const aiData = await fetch("/api/completion", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        prompt: `Recommend me 3 movies, in the format of a javascript array of objects like: [{title: movie title, summary: movie summary (short, 20 word summary of the movie)}], that are similar to these 3 movies: ${inputs[0]}, ${inputs[1]}, ${inputs[2]}`,
+      }),
+    }).then((aiData) => aiData.json());
+
+    console.log(aiData.data.text);
+  };
+
+  const promptSubmit = () => {
+    fetchMovies();
+  };
 
   return (
     <div className="bg-zinc-600">
@@ -280,7 +298,7 @@ const TransitionStateTesting = ({ filter, setFilter }) => {
               color="secondary"
               size="small"
               className="w-[50px] h-[50px] bg-purple-700"
-              onClick={handleNext}
+              onClick={promptSubmit}
             >
               {" "}
               Submit
@@ -306,7 +324,7 @@ const TransitionStateTesting = ({ filter, setFilter }) => {
               color="secondary"
               size="small"
               className="w-[50px] h-[50px] bg-purple-700"
-              onClick={handleNext}
+              onClick={promptSubmit}
             >
               {" "}
               Submit
