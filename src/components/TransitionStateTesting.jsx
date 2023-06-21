@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import { TextField } from "@mui/material";
 import FilterState from "@/components/FilterState";
+import openaiInstance from "../../utils/openai";
 
 const TransitionStateTesting = ({ filter, setFilter }) => {
   const [step, setStep] = useState(0);
@@ -34,6 +35,8 @@ const TransitionStateTesting = ({ filter, setFilter }) => {
     handleNext();
     console.log(inputs);
   };
+
+  const promptSubmit = () => {};
 
   return (
     <div className="bg-zinc-600">
