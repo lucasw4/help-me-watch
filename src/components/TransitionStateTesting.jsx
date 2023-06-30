@@ -52,12 +52,31 @@ const TransitionStateTesting = ({ filter, setFilter }) => {
         The array should be trimmed of all white space
         `,
       }),
-    }).then((aiData) => aiData.json());
+    }).then();
     setLoading(false);
-    const arrayData = JSON.parse(aiData.data.text);
-    setResponse(arrayData);
+    let arrayData;
+    if (aiData.data) {
+      if (isJson(aiData.data.text)) {
+        arrayData = JSON.parse(aiData.data.text);
+        setResponse(arrayData);
+      } else {
+        setResponse(aiData.data.text);
+      }
+    } else {
+      setResponse("Error fetching results.");
+    }
     console.log(typeof arrayData);
     console.log(response);
+  };
+
+  const isJson = function (str) {
+    try {
+      JSON.parse(str);
+    } catch (e) {
+      return false;
+    }
+    console.log("is json");
+    return true;
   };
 
   const promptSubmit = () => {
@@ -351,9 +370,15 @@ const TransitionStateTesting = ({ filter, setFilter }) => {
           <h3 className="text-2xl font-bold text-purple-500 mb-5">
             Your Recommendations:
           </h3>
-          {response.map((ele, i) => {
-            return <div key={i}>{ele}</div>;
-          })}
+          {Array.isArray(response) ? (
+            <div>
+              {response.map((ele, i) => {
+                return <div key={i}>{ele}</div>;
+              })}
+            </div>
+          ) : (
+            <div>{response}</div>
+          )}
         </div>
       )}
     </div>
